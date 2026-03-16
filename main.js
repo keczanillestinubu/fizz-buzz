@@ -1,36 +1,50 @@
 /*
-This script logs the numbers from 0 to 100, replace every multiple of 3 by Fizz,
-every multiple of 5 by Buzz, and every multiple of both 3 and 5 by FizzBuzz!
+This script prints numbers from 1 to 100:
+- "Fizz" for multiples of 3
+- "Buzz" for multiples of 5  
+- "FizzBuzz" for multiples of both 3 and 5
 
-It also counts the number of "Fizz"-es, "Buzz"-es, "FizzBuzz"-es, and plain numbers,
-and prints the counts at the end.
+It counts occurrences of each type and prints the counts at the end.
 */
-a=0, b=0, c=0, d=0;
-var z=0
-while (z<100) {
-    if (z+1 == Math.floor((z+1)/5)*5 && z+1 != Math.floor((z+1)/3)*3) {
-    console.log("Buzz");
-    a=a+1;
-    z=z+1;
-    continue;
-    }
-    if (z+1 == Math.floor((z+1)/3)*3 && z+1 == Math.floor((z+1)/5)*5) {
-        console.log("FizzBuzz");
-        b=b+1;
-        z=z+1;
-        continue;
-    }
-if (z+1 != Math.floor((z+1)/5)*5 && z+1 != Math.floor((z+1)/3)*3) {
-console.log((z+1).toString());
-c+=1;
-z+=1;
-    continue;
+
+function isFizzBuzz(num) {
+    return num % 3 === 0 && num % 5 === 0;
 }
-    console.log("Fizz");
-    z++;
-    d++;
+
+function isFizz(num) {
+    return num % 3 === 0;
 }
-console.log("Number of buzzes: ", a)
-console.log("Number of fizzbuzzes:", b)
-console.log("Number of unchanged numbers:", c)
-console.log("Number of fizzes:", d)
+
+function isBuzz(num) {
+    return num % 5 === 0;
+}
+
+function main() {
+    let buzzCount = 0;
+    let fizzBuzzCount = 0;
+    let numberCount = 0;
+    let fizzCount = 0;
+
+    for (let i = 1; i <= 100; i++) {
+        if (isFizzBuzz(i)) {
+            console.log("FizzBuzz");
+            fizzBuzzCount++;
+        } else if (isBuzz(i)) {
+            console.log("Buzz");
+            buzzCount++;
+        } else if (isFizz(i)) {
+            console.log("Fizz");
+            fizzCount++;
+        } else {
+            console.log(i.toString());
+            numberCount++;
+        }
+    }
+
+    console.log("Number of buzzes: ", buzzCount);
+    console.log("Number of fizzbuzzes:", fizzBuzzCount);
+    console.log("Number of unchanged numbers:", numberCount);
+    console.log("Number of fizzes:", fizzCount);
+}
+
+main();
